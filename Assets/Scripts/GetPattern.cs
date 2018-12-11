@@ -17,10 +17,10 @@ public class GetPattern : MonoBehaviour {
 	void Update() {
 		switch(scene.GetComponent<States>().GetCurrentState()) {
 			case "precombat":
-				Reset();
+				
 			break;
 			case "combat":
-				
+				Reset();
 			break;
 			case "postcombat":
 			break;
@@ -45,8 +45,9 @@ public class GetPattern : MonoBehaviour {
 	}
 
 	public void Reset() {
-		patterns[0].SetActive(false);
-		patterns[1].SetActive(false);
-		patterns[2].SetActive(false);
+		Debug.Log("hit");
+		for(int i = 0; i < patterns.Length; i++) {
+			patterns[i].SetActive(false);
+		}
 	}
 }

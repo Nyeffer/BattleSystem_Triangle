@@ -27,6 +27,7 @@ public class BattleManager : MonoBehaviour {
 	private int playerAtk;
 	private int enemyHp;
 	private int enemyAtk;
+	private bool isSet = false;
 
 	// Check if instance already exist
 	void Awake() {
@@ -60,8 +61,11 @@ public class BattleManager : MonoBehaviour {
 					combatHUD.SetActive(false);
 					postCombatHUD.SetActive(false);
 					// Check Enemy Attack Pattern
-					enemyAtkPattern = desiredEnemy.GetComponent<Enemy>().PickAttackPatterns();
-					SetEnemyPattern(enemyAtkPattern, 3);
+					if(!isSet) {
+						enemyAtkPattern = desiredEnemy.GetComponent<Enemy>().PickAttackPatterns();
+						SetEnemyPattern(enemyAtkPattern, 3);
+						isSet = true;
+					}
 					//enemyPat = ArrayUtils.toObject(enemyPattern);
 					// Check Player Attack Pattern
 					// playerAtkPattern[0] = player.GetComponent<Player>().GetDesiredAtk()[0];
@@ -70,6 +74,7 @@ public class BattleManager : MonoBehaviour {
 					//playerPat = ArrayUtils.toObject(playerPattern);
 				break;
 				case "combat":
+					Debug.Log("Combat");
 					SetPlayerPattern(player.GetComponent<Player>().GetDesiredAtk(), 3);
 					preCombatHUD.SetActive(false);
 					combatHUD.SetActive(true);
@@ -107,7 +112,7 @@ public class BattleManager : MonoBehaviour {
 								} else if(playerPattern[1] == 1 && enemyPattern[1] == 3) {
 									Debug.Log("Player receive " + player.GetComponent<Player>().TakeDamage(enemyAtk) + " ");
 								} else if(playerPattern[1] == enemyPattern[1]){
-									Debug.Log("Attack was Neutralized");
+							 		Debug.Log("Attack was Neutralized");
 								}
 							break;
 							case 2:
@@ -131,18 +136,22 @@ public class BattleManager : MonoBehaviour {
 							break;
 						}
 					}
+					isSet = false; 
 					if(player.GetComponent<Player>().GetHp() <= 0) {
 						// Go To Lose Scene
 					} else if(desiredEnemy.GetComponent<Enemy>().GetHp() <= 0) {
 						State.ChangeState("postcombat");
 					} else {
+						playerPattern = new int[3];
+						enemyAtkPattern = new int[3];
+						enemyPattern = new int[3];
 						State.ChangeState("precombat");
 					}
 				break;
 				case "postcombat":
 					// Show the gain of Exp
 					// Level Mechanic in here
-					// For now 
+					// For now
 					State.ChangeState("precombat");
 				break;
 				default:
@@ -189,5 +198,13 @@ public class BattleManager : MonoBehaviour {
 		for(int i = 0; i < num; i++) {
 			enemyPattern[i] = pattern[i];
 		}
+	}
+
+	public int[] GetEnemyPat() {
+		return enemyPattern;
+	}
+
+	public GameObject GetEnemy() {
+		return desiredEnemy;
 	}		
 }

@@ -69,5 +69,13 @@ public class Enemy : MonoBehaviour {
 		return defVal;
 	}
 
+	public void SetFamiliarity(int newVal) {
+		familiarity = newVal;
+	}
+
+	public int GetFamiliarity() {
+		return familiarity;
+	}
+
 
 }

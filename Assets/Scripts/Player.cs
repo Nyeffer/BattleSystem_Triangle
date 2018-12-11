@@ -12,6 +12,8 @@ public class Player : MonoBehaviour {
 	public float atkGrowth;
 	public float defGrowth;
 	public float hpGrowth;
+
+	public float atkTime = 3.0f;
 	// Private Variables
 	private int currentHp; // Updated number of Health
 	private int[] attackPattern; // Array of integer [ 1, 2, 3]
@@ -23,6 +25,8 @@ public class Player : MonoBehaviour {
 	private int level;
 	private int counter = -1;
 	private bool isReady = false;
+	private bool isAttacking = false;
+	private float atkCounter = 0.0f;
 
 	void Start() {
 		atkVal = (int)(atk * ((atk * atkGrowth) + 1));
@@ -33,25 +37,39 @@ public class Player : MonoBehaviour {
 		desiredAtk = new int[3];
 	}
 	void Update() {
+		Debug.Log(isReady);
+		Debug.Log(atkCounter);
+		if(isAttacking) {
+			if(atkCounter <= atkTime) {
+				atkCounter += Time.deltaTime;
+			} else {
+				isReady = false;
+				isAttacking = false;
+				atkCounter = 0.0f;
+			}
+		}
 		// Check if the Attack Input is enough
-		if(counter <= 2) {
-			StartCoroutine(delay(1.0f));
+		if(!isReady) {
 			states.ChangeState("precombat");
 		}
-		if(isReady == true) {
-			// Change the State to Combat
-			states.ChangeState("combat");
-			// attackPattern = new int[3];
-			isReady = false;
-		}
+
 	}
 
 	public void Use_Pattern(int atkType) {
 		counter += 1;
 		attackPattern[counter] = atkType;
 		if(counter >= 2) {
-			counter = -1;
 			isReady = true;
+		}
+	}
+
+	public void CombatReady() {
+		if(isReady == true) {
+			// Change the State to Combat
+			states.ChangeState("combat");
+			// attackPattern = new int[3];
+			counter = -1;
+			isAttacking = true;
 		}
 	}
 
