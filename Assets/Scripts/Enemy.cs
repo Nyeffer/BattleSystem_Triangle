@@ -11,6 +11,9 @@ public class Enemy : MonoBehaviour {
 	public int atk;
 	public int def;
 	public int level;
+	public int familiarity = 0;
+	
+
 
 	// Private Variables
 	private int currentHp;
