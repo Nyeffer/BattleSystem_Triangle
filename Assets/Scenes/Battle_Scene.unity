@@ -347,6 +347,7 @@ MonoBehaviour:
   atkGrowth: 0.5
   defGrowth: 0.25
   hpGrowth: 0.1
+  atkTime: 3
 --- !u!1 &47610152
 GameObject:
   m_ObjectHideFlags: 0
@@ -1473,7 +1474,7 @@ Prefab:
     - target: {fileID: 114265041149065236, guid: d3912d6a6db9ba74ea5f7f8991096b0d,
         type: 2}
       propertyPath: familiarity
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3912d6a6db9ba74ea5f7f8991096b0d, type: 2}
@@ -1610,7 +1611,7 @@ Prefab:
     - target: {fileID: 114856468353703162, guid: 17660a30d5d4cc04582a462094541bf4,
         type: 2}
       propertyPath: familiarity
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17660a30d5d4cc04582a462094541bf4, type: 2}
@@ -1887,7 +1888,7 @@ Prefab:
     - target: {fileID: 114835759881203098, guid: f562b4bc6f78c054fa9833e48f554a11,
         type: 2}
       propertyPath: familiarity
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f562b4bc6f78c054fa9833e48f554a11, type: 2}
@@ -3369,7 +3370,7 @@ Prefab:
     - target: {fileID: 114644322879769830, guid: f72ca05937ff55744abe7b1b2c49a85d,
         type: 2}
       propertyPath: familiarity
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f72ca05937ff55744abe7b1b2c49a85d, type: 2}
